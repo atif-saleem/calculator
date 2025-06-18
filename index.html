@@ -78,8 +78,8 @@
             }
          
           console.log(final)
+          let sperator="";
           const refinal=solveArea.value.split("").map((elem,i)=>{
-            let sperator="";
             switch (elem){
                 case ("X"):
                     sperator="X";
@@ -96,11 +96,11 @@
                      case ("%"):
                     sperator="%";
                     break;
-                    default:console.log("not found")
+                    default:console.log("not found");
             }
-            if(elem=="X" || elem=="-" || elem=="+" || elem=="/"|| elem=="%"){
+            if(elem==sperator){
                     let agianAddDot=solveArea.value.split(sperator)
-            let finalAgain= agianAddDot[1].split("").filter((el)=>{
+            let finalAgain= agianAddDot[agianAddDot.length-1].split("").filter((el)=>{
                 return el=="."
              })
               if(finalAgain.length==0){
