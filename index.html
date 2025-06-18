@@ -66,7 +66,7 @@
     }
     function addDot(dot){
         let final="";
-          if(solveArea.value=="0"){}
+          if(solveArea.value=="0"){solveArea.value+=dot}
           else{
             let checkFirst=solveArea.value;
              final= checkFirst.split("").filter((elem)=>{
@@ -76,10 +76,37 @@
                 solveArea.value+=dot;
                 
             }
+         
           console.log(final)
           const refinal=solveArea.value.split("").map((elem,i)=>{
+            let sperator="";
+            switch (elem){
+                case ("X"):
+                    sperator="X";
+                    break;
+                     case ("-"):
+                    sperator="-";
+                    break;
+                     case ("+"):
+                    sperator="+";
+                    break;
+                     case ("/"):
+                    sperator="/";
+                    break;
+                     case ("%"):
+                    sperator="%";
+                    break;
+                    default:console.log("not found")
+            }
             if(elem=="X" || elem=="-" || elem=="+" || elem=="/"|| elem=="%"){
+                    let agianAddDot=solveArea.value.split(sperator)
+            let finalAgain= agianAddDot[1].split("").filter((el)=>{
+                return el=="."
+             })
+              if(finalAgain.length==0){
                 solveArea.value+=dot;
+                
+            }
             }
           })
         
@@ -106,7 +133,8 @@
         let testOperator=solveArea.value.split("").filter((el)=>{
     console.log(Number(el))
     console.log(typeof(Number(el)))
-     return String(Number(el))=="NaN"
+    if(el!="."){
+     return String(Number(el))=="NaN"}
         })
         console.log(testOperator)
           let testOperand=solveArea.value.split(testOperator).filter((el)=>{
@@ -115,8 +143,8 @@
      return String(Number(el))!="NaN"
         })
         console.log(testOperand);
-        if(testOperator=="+"){
-           solveArea.value= (Number(testOperand[0])+Number(testOperand[1]))
+        if(testOperator=="+" || testOperator[1]=="+"){
+           solveArea.value= Number(testOperand[0])+Number(testOperand[1])
         }
          if(testOperator=="-"){
            solveArea.value= (Number(testOperand[0]) - Number(testOperand[1]))
